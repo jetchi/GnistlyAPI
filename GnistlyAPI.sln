@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GnistlyAPI", "GnistlyAPI\GnistlyAPI.csproj", "{916C6ED8-B050-4425-838F-D6B9DF5C23B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GnistlyAPI.Tests", "GnistlyAPI.Tests\GnistlyAPI.Tests.csproj", "{ED37665B-0614-4BAC-B22C-7BEC2D4A872D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{916C6ED8-B050-4425-838F-D6B9DF5C23B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{916C6ED8-B050-4425-838F-D6B9DF5C23B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{916C6ED8-B050-4425-838F-D6B9DF5C23B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{916C6ED8-B050-4425-838F-D6B9DF5C23B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED37665B-0614-4BAC-B22C-7BEC2D4A872D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED37665B-0614-4BAC-B22C-7BEC2D4A872D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED37665B-0614-4BAC-B22C-7BEC2D4A872D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED37665B-0614-4BAC-B22C-7BEC2D4A872D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {850EB969-AD75-4F74-B4ED-47E201D335A7}
+	EndGlobalSection
+EndGlobal
