@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
+
+namespace GnistlyAPI.Models
+{
+    [Table("tbl_Idea")]
+    public class Idea
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required]
+        public int IdeaID { get; set; }
+        public string IdeaTitle { get; set; }
+        public string IdeaDescription { get; set; }
+        public DateTime IdeaDate { get; set; }
+        public int IdeaImpact { get; set; }
+        public int IdeaEffort { get; set; }
+
+        //following can have null value
+        public int IdeaSavings { get; set; }
+        public string IdeaChallenges { get; set; }
+        public string IdeaResults { get; set; }
+
+        public int UserID { get; set; } // FK
+        public User User { get; set; } //Navigation Property
+    }
+}

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -45,6 +46,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -155,11 +162,64 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\DepartmentsController.cs" />
+    <Compile Include="Controllers\EditsController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
+    <Compile Include="Controllers\HashtagsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IdeasController.cs" />
+    <Compile Include="Controllers\PasswordsController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\UrlsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\ZipCodesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011262253195_Initial.cs" />
+    <Compile Include="Migrations\202011262253195_Initial.designer.cs">
+      <DependentUpon>202011262253195_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011271046308_deleteNavigationPropInCustomer.cs" />
+    <Compile Include="Migrations\202011271046308_deleteNavigationPropInCustomer.designer.cs">
+      <DependentUpon>202011271046308_deleteNavigationPropInCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011281842302_AddedNewTablesAndChanges.cs" />
+    <Compile Include="Migrations\202011281842302_AddedNewTablesAndChanges.designer.cs">
+      <DependentUpon>202011281842302_AddedNewTablesAndChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011281923148_ChangeZipCodeTableName.cs" />
+    <Compile Include="Migrations\202011281923148_ChangeZipCodeTableName.designer.cs">
+      <DependentUpon>202011281923148_ChangeZipCodeTableName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011281927235_AddedNavigationCustomerToZipCode.cs" />
+    <Compile Include="Migrations\202011281927235_AddedNavigationCustomerToZipCode.designer.cs">
+      <DependentUpon>202011281927235_AddedNavigationCustomerToZipCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011291230589_ChangedForeignKeysNotNUllAddedPasswords.cs" />
+    <Compile Include="Migrations\202011291230589_ChangedForeignKeysNotNUllAddedPasswords.designer.cs">
+      <DependentUpon>202011291230589_ChangedForeignKeysNotNUllAddedPasswords.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Context.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Edit.cs" />
+    <Compile Include="Models\File.cs" />
+    <Compile Include="Models\Hashtag.cs" />
+    <Compile Include="Models\Idea.cs" />
+    <Compile Include="Models\IdeaUser.cs" />
+    <Compile Include="Models\Password.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\Url.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ZipCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -215,7 +275,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -248,6 +307,26 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202011262253195_Initial.resx">
+      <DependentUpon>202011262253195_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011271046308_deleteNavigationPropInCustomer.resx">
+      <DependentUpon>202011271046308_deleteNavigationPropInCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011281842302_AddedNewTablesAndChanges.resx">
+      <DependentUpon>202011281842302_AddedNewTablesAndChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011281923148_ChangeZipCodeTableName.resx">
+      <DependentUpon>202011281923148_ChangeZipCodeTableName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011281927235_AddedNavigationCustomerToZipCode.resx">
+      <DependentUpon>202011281927235_AddedNavigationCustomerToZipCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011291230589_ChangedForeignKeysNotNUllAddedPasswords.resx">
+      <DependentUpon>202011291230589_ChangedForeignKeysNotNUllAddedPasswords.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -282,7 +361,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
