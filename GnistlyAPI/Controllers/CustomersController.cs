@@ -45,7 +45,7 @@ namespace GnistlyAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != customer.CustomerID)
+            if (!id.Equals(customer.CustomerID))
             {
                 return BadRequest();
             }
@@ -113,7 +113,7 @@ namespace GnistlyAPI.Controllers
 
         private bool CustomerExists(int id)
         {
-            return db.Customers.Count(e => e.CustomerID == id) > 0;
+            return db.Customers.Count(e => e.CustomerID.Equals( id)) > 0;
         }
     }
 }

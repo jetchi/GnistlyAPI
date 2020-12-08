@@ -17,6 +17,6 @@ namespace GnistlyAPI.Models
         public string CommentText { get; set; }
         
         public int IdeaID { get; set; } //FK
-        public Idea Idea { get; set; } //Navigation Property
+        public Idea Idea { get; set; } //Navigation Property // make virtual to achieve lazy loading
     }
 }

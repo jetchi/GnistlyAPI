@@ -13,9 +13,9 @@ namespace GnistlyAPI.Models
     public class Customer
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required] // will throw "System.Data.Entity.Validation.DbEntityValidationException" exception if we try to store withaout a value in this field
-        public int CustomerID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int CustomerID { get; set; } // Guid = "global unique identifier" did not work just like this
         //fields get the "NOT NUll" setting in DB only until empty line to the next attribute
 
         [Required]

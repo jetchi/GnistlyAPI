@@ -18,16 +18,43 @@ namespace GnistlyAPI.Controllers
         private Context db = new Context();
 
         // GET: api/Ideas
-        public IQueryable<Idea> GetIdeas()
+        //public IQueryable<Idea> GetIdeas() -- replaced by -see below. JC
+        //{
+        //    return db.Ideas;
+        //}
+
+        // GET api/Ideas
+        public IQueryable<IdeaDTO> GetIdeas()
         {
-            return db.Ideas;
+            var ideas = from i in db.Ideas
+                        select new IdeaDTO()
+                        {
+                            IdeaID = i.IdeaID,
+                            IdeaTitle = i.IdeaTitle,
+                            IdeaDescription = i.IdeaDescription
+                        };
+            return ideas;
         }
 
         // GET: api/Ideas/5
-        [ResponseType(typeof(Idea))]
+        [ResponseType(typeof(IdeaDetailDTO))] //changed type JC
         public async Task<IHttpActionResult> GetIdea(int id)
         {
-            Idea idea = await db.Ideas.FindAsync(id);
+            var idea = await db.Ideas.Include(b => b.User).Select(b =>
+                new IdeaDetailDTO()
+                {
+                    IdeaID = b.IdeaID,
+                    IdeaTitle = b.IdeaTitle,
+                    IdeaDescription = b.IdeaDescription,
+                    IdeaDate = b.IdeaDate,
+                    IdeaImpact = b.IdeaImpact,
+                    IdeaEffort = b.IdeaEffort,
+                    IdeaChallenges = b.IdeaChallenges,
+                    IdeaResults = b.IdeaResults,
+                    IdeaSavings = b.IdeaSavings,
+                    IdeaAuthor = b.User.UserFname
+                }).SingleOrDefaultAsync(b => b.IdeaAuthor.Equals(id));
+
             if (idea == null)
             {
                 return NotFound();
@@ -71,8 +98,8 @@ namespace GnistlyAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Ideas
-        [ResponseType(typeof(Idea))]
+        // POST: api/Ideas //changed to return a DTO
+        [ResponseType(typeof(IdeaDTO))] // changed type from Idea to IdeaDTO
         public async Task<IHttpActionResult> PostIdea(Idea idea)
         {
             if (!ModelState.IsValid)
@@ -83,7 +110,18 @@ namespace GnistlyAPI.Controllers
             db.Ideas.Add(idea);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = idea.IdeaID }, idea);
+            //new code start:
+            db.Entry(idea).Reference(x => x.User).Load(); //load user name
+
+            var dto = new IdeaDTO()
+            {
+                IdeaID = idea.IdeaID,
+                IdeaTitle = idea.IdeaTitle,
+                IdeaDescription = idea.IdeaDescription
+            };
+            //new code stop
+
+            return CreatedAtRoute("DefaultApi", new { id = idea.IdeaID }, dto);
         }
 
         // DELETE: api/Ideas/5
