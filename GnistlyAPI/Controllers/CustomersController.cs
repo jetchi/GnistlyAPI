@@ -27,7 +27,7 @@ namespace GnistlyAPI.Controllers
         [ResponseType(typeof(Customer))]
         public async Task<IHttpActionResult> GetCustomer(int id)
         {
-            Customer customer = await db.Customers.FindAsync(id);
+            Customer customer = await db.Customers.Include(c => c.ZipCode).FirstOrDefaultAsync(c => c.CustomerID == id); // FirstOrdefealutasync can find all kind of properties
             if (customer == null)
             {
                 return NotFound();

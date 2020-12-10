@@ -12,7 +12,7 @@ namespace GnistlyAPI.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]
+        // required fjernet!
         public int IdeaID { get; set; }
         public string IdeaTitle { get; set; }
         public string IdeaDescription { get; set; }
@@ -26,6 +26,8 @@ namespace GnistlyAPI.Models
         public string IdeaResults { get; set; }
 
         public int UserID { get; set; } // FK
+
+        [ForeignKey("UserID")]
         public User User { get; set; } //Navigation Property
     }
 }

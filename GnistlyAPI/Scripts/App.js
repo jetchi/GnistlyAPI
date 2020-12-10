@@ -1,9 +1,10 @@
-﻿var ViewModel = function () {
+﻿/*
+var ViewModel = function () {
     var self = this;
     self.ideas = ko.observableArray();
     self.error = ko.observable();
 
-    var ideasUri = '/api/ideas/';
+    var ideasUri = '/api/Ideas/';
 
     function ajaxHelper(uri, method, data) {
         self.error(''); // Clear error message
@@ -36,7 +37,17 @@
         ajaxHelper(ideasUri + item.IdeaID, 'GET').done(function (data) {
             self.detail(data);
         });
-    }
+}
+
+    var usersUri = '/api/Users/';
+
+        function getusers() {
+            ajaxHelper(usersUri, 'GET').done(function (data) {
+                self.users(data);
+            });
+        }
+
+getUsers();
 
     self.users = ko.observableArray();
     self.newIdea = {
@@ -49,29 +60,11 @@
         IdeaChallenges: ko.observable(),
         IdeaResults: ko.observable(),
         IdeaSavings: ko.observable(),
-        IIdeaID: ko.observable(),
+        IdeaID: ko.observable(),
     }
+    ajaxHelper(ideasUri, 'POST', idea).done(function (item) {
+        self.ideas.push(item);
+    });
 
-    var usersUri = '/api/users/';
-
-    function getusers() {
-        ajaxHelper(usersUri, 'GET').done(function (data) {
-            self.users(data);
-        });
-    }
-
-    self.addBook = function (formElement) {
-        var book = {
-            AuthorId: self.newBook.Author().Id,
-            Genre: self.newBook.Genre(),
-            Price: self.newBook.Price(),
-            Title: self.newBook.Title(),
-            Year: self.newBook.Year()
-        };
-
-        ajaxHelper(ideasUri, 'POST', idea).done(function (item) {
-            self.ideas.push(item);
-        });
-    }   
-
-    getUsers();
+    */
+    

@@ -18,23 +18,23 @@ namespace GnistlyAPI.Controllers
         private Context db = new Context();
 
         // GET: api/Ideas
-        //public IQueryable<Idea> GetIdeas() -- replaced by -see below. JC
-        //{
-        //    return db.Ideas;
-        //}
-
-        // GET api/Ideas
-        public IQueryable<IdeaDTO> GetIdeas()
+        public IQueryable<Idea> GetIdeas() //-- replaced by -see below.JC
         {
-            var ideas = from i in db.Ideas
-                        select new IdeaDTO()
-                        {
-                            IdeaID = i.IdeaID,
-                            IdeaTitle = i.IdeaTitle,
-                            IdeaDescription = i.IdeaDescription
-                        };
-            return ideas;
+            return db.Ideas;
         }
+
+        //// GET api/Ideas
+        //public IQueryable<IdeaDTO> GetIdeas()
+        //{
+        //    var ideas = from i in db.Ideas
+        //                select new IdeaDTO()
+        //                {
+        //                    IdeaID = i.IdeaID,
+        //                    IdeaTitle = i.IdeaTitle,
+        //                    IdeaDescription = i.IdeaDescription
+        //                };
+        //    return ideas;
+        //}
 
         // GET: api/Ideas/5
         [ResponseType(typeof(IdeaDetailDTO))] //changed type JC
@@ -99,7 +99,7 @@ namespace GnistlyAPI.Controllers
         }
 
         // POST: api/Ideas //changed to return a DTO
-        [ResponseType(typeof(IdeaDTO))] // changed type from Idea to IdeaDTO
+        [ResponseType(typeof(Idea))] // changed type from Idea to IdeaDTO
         public async Task<IHttpActionResult> PostIdea(Idea idea)
         {
             if (!ModelState.IsValid)
@@ -113,11 +113,18 @@ namespace GnistlyAPI.Controllers
             //new code start:
             db.Entry(idea).Reference(x => x.User).Load(); //load user name
 
-            var dto = new IdeaDTO()
+            var dto = new Idea()
             {
                 IdeaID = idea.IdeaID,
                 IdeaTitle = idea.IdeaTitle,
-                IdeaDescription = idea.IdeaDescription
+                IdeaDescription = idea.IdeaDescription,
+                IdeaDate = idea.IdeaDate,
+                IdeaImpact = idea.IdeaImpact,
+                IdeaEffort = idea.IdeaEffort,
+                IdeaChallenges = idea.IdeaChallenges,
+                IdeaSavings = idea.IdeaSavings,
+                IdeaResults = idea.IdeaResults,
+                UserID = idea.UserID
             };
             //new code stop
 

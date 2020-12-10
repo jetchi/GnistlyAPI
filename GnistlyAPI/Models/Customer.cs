@@ -13,7 +13,7 @@ namespace GnistlyAPI.Models
     public class Customer
     {
         [Key]
-        [Required] // will throw "System.Data.Entity.Validation.DbEntityValidationException" exception if we try to store withaout a value in this field
+        //[Required] // will throw "System.Data.Entity.Validation.DbEntityValidationException" exception if we try to store withaout a value in this field
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CustomerID { get; set; } // Guid = "global unique identifier" did not work just like this
         //fields get the "NOT NUll" setting in DB only until empty line to the next attribute
@@ -29,6 +29,8 @@ namespace GnistlyAPI.Models
         // [ForeignKey("Zip")] As per the default convention, EF makes a property as foreign key property when it's name matches with the primary key property of a related entity.
         [StringLength(4)]
         public string Zip { get; set; }
+
+        [ForeignKey("Zip")]
         public ZipCode ZipCode { get; set; } //Navigation Property 
         //The customer class contains the navigation property to the related ZipCode table.
 

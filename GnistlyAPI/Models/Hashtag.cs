@@ -12,7 +12,7 @@ namespace GnistlyAPI.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]
+        //[Required]
         public int HashtagID { get; set; }
         public string HashtagText { get; set; }
         

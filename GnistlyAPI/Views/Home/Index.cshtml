@@ -1,4 +1,4 @@
-﻿<!--
+﻿
 <div class="jumbotron">
     <h1>Test Commit</h1>
     <h1>ASP.NET</h1>
@@ -24,8 +24,8 @@
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
     </div>
 </div>
- -->
-
+ 
+<!--
 @section scripts {
     @Scripts.Render("~/bundles/app")
 }
@@ -54,77 +54,77 @@
     </div>
 
     <div class="col-md-4">
-        <!-- TODO: Book details -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="panel-title">Detail</h2>
-            </div>
-            <table class="table">
-                <tr><td>Author</td><td data-bind="text: detail().IdeaAuthor"></td></tr>
-                <tr><td>Title</td><td data-bind="text: detail().IdeaTitle"></td></tr>
-                <tr><td>Date</td><td data-bind="text: detail().IdeaDate"></td></tr>
-                <tr><td>Description</td><td data-bind="text: detail().IdesDescription"></td></tr>
-                <tr><td>Impact</td><td data-bind="text: detail().IdeaImpact"></td></tr>
-                <tr><td>Effort</td><td data-bind="text: detail().IdeaEffort"></td></tr>
-                <tr><td>Challenge</td><td data-bind="text: detail().IdeaChallenges"></td></tr>
-                <tr><td>Results</td><td data-bind="text: detail().IdeaResults"></td></tr>
-                <tr><td>Savings</td><td data-bind="text: detail().IdeaSavings"></td></tr>
-                <tr><td>Number</td><td data-bind="text: detail().IdeaID"></td></tr>
-            </table>
-        </div>
+        <!-- TODO: Book details 
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title">Detail</h2>
+    </div>
+    <table class="table">
+        <tr><td>Author</td><td data-bind="text: detail().IdeaAuthor"></td></tr>
+        <tr><td>Title</td><td data-bind="text: detail().IdeaTitle"></td></tr>
+        <tr><td>Date</td><td data-bind="text: detail().IdeaDate"></td></tr>
+        <tr><td>Description</td><td data-bind="text: detail().IdesDescription"></td></tr>
+        <tr><td>Impact</td><td data-bind="text: detail().IdeaImpact"></td></tr>
+        <tr><td>Effort</td><td data-bind="text: detail().IdeaEffort"></td></tr>
+        <tr><td>Challenge</td><td data-bind="text: detail().IdeaChallenges"></td></tr>
+        <tr><td>Results</td><td data-bind="text: detail().IdeaResults"></td></tr>
+        <tr><td>Savings</td><td data-bind="text: detail().IdeaSavings"></td></tr>
+        <tr><td>Number</td><td data-bind="text: detail().IdeaID"></td></tr>
+    </table>
+</div>
     </div>
 
-    <div class="col-md-4">
-        <!-- TODO: Add new book -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="panel-title">Add Idea</h2>
-            </div>
+<div class="col-md-4">
+    <!-- TODO: Add new book 
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">Add Idea</h2>
+        </div>
 
-            <div class="panel-body">
-                <form class="form-horizontal" data-bind="submit: addIdea">
-                    <div class="form-group">
-                        <label for="inputAuthor" class="col-sm-2 control-label">User</label>
-                        <div class="col-sm-10">
-                            <select data-bind="options:users, optionsText: 'UserFname', value: newIdea.User"></select>
-                        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" data-bind="submit: addIdea">
+                <div class="form-group">
+                    <label for="inputAuthor" class="col-sm-2 control-label">User</label>
+                    <div class="col-sm-10">
+                        <select data-bind="options:users, optionsText: 'UserFname', value: newIdea.User"></select>
+                    </div>
+                </div>
+
+                <div class="form-group" data-bind="with: newIdea">
+                    <label for="inputTitle" class="col-sm-2 control-label">Title</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputTitle" data-bind="value:IdeaTitle" />
                     </div>
 
-                    <div class="form-group" data-bind="with: newIdea">
-                        <label for="inputTitle" class="col-sm-2 control-label">Title</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputTitle" data-bind="value:IdeaTitle" />
-                        </div>
-
-                        <label for="inputImpact" class="col-sm-2 control-label">Impact</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="inputImpact" data-bind="value:IdeaImpact" />
-                        </div>
-
-                        <label for="inputEffort" class="col-sm-2 control-label">Effort</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="any" class="form-control" id="inputEffort" data-bind="value:IdeaEffort" />
-                        </div>
-
-                        <label for="inputChallenges" class="col-sm-2 control-label">Challenges</label>
-                        <div class="col-sm-10">
-                            <input type="text" step="any" class="form-control" id="inputChallenges" data-bind="value:IdeaChallenges" />
-                        </div>
-
-                        <label for="inputResults" class="col-sm-2 control-label">Results</label>
-                        <div class="col-sm-10">
-                            <input type="text" step="any" class="form-control" id="inputResults" data-bind="value:IdeaResults" />
-                        </div>
-
-                        <label for="inputSavings" class="col-sm-2 control-label">Savings</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="any" class="form-control" id="inputSavings" data-bind="value:IdeaSavings" />
-                        </div>
+                    <label for="inputImpact" class="col-sm-2 control-label">Impact</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="inputImpact" data-bind="value:IdeaImpact" />
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-            </div>
+
+                    <label for="inputEffort" class="col-sm-2 control-label">Effort</label>
+                    <div class="col-sm-10">
+                        <input type="number" step="any" class="form-control" id="inputEffort" data-bind="value:IdeaEffort" />
+                    </div>
+
+                    <label for="inputChallenges" class="col-sm-2 control-label">Challenges</label>
+                    <div class="col-sm-10">
+                        <input type="text" step="any" class="form-control" id="inputChallenges" data-bind="value:IdeaChallenges" />
+                    </div>
+
+                    <label for="inputResults" class="col-sm-2 control-label">Results</label>
+                    <div class="col-sm-10">
+                        <input type="text" step="any" class="form-control" id="inputResults" data-bind="value:IdeaResults" />
+                    </div>
+
+                    <label for="inputSavings" class="col-sm-2 control-label">Savings</label>
+                    <div class="col-sm-10">
+                        <input type="number" step="any" class="form-control" id="inputSavings" data-bind="value:IdeaSavings" />
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
         </div>
     </div>
 </div>
-
+</div>
+-->
