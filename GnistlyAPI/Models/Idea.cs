@@ -12,7 +12,7 @@ namespace GnistlyAPI.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        // required fjernet!
+        // required deleted, tested and must stay deleted
         public int IdeaID { get; set; }
         public string IdeaTitle { get; set; }
         public string IdeaDescription { get; set; }
@@ -20,7 +20,6 @@ namespace GnistlyAPI.Models
         public int IdeaImpact { get; set; }
         public int IdeaEffort { get; set; }
 
-        //following can have null value
         public int IdeaSavings { get; set; }
         public string IdeaChallenges { get; set; }
         public string IdeaResults { get; set; }

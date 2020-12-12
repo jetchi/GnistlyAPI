@@ -8,21 +8,24 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using GnistlyAPI.Models;
 
 namespace GnistlyAPI.Controllers
 {
+   [EnableCors(origins: "*", headers: "*", methods: "*")] //enables all headers, also from another origin. If only one other origign should be allowed, use the URI where the webClient is deployed as origin parameter (write "http://localhost:63342" instead of the first star).
     public class IdeasController : ApiController
     {
         private Context db = new Context();
 
         // GET: api/Ideas
-        public IQueryable<Idea> GetIdeas() //-- replaced by -see below.JC
+        public IQueryable<Idea> GetIdeas() 
         {
             return db.Ideas;
         }
 
+        // not in use:
         //// GET api/Ideas
         //public IQueryable<IdeaDTO> GetIdeas()
         //{
@@ -37,11 +40,11 @@ namespace GnistlyAPI.Controllers
         //}
 
         // GET: api/Ideas/5
-        [ResponseType(typeof(IdeaDetailDTO))] //changed type JC
+        [ResponseType(typeof(Idea))] 
         public async Task<IHttpActionResult> GetIdea(int id)
         {
             var idea = await db.Ideas.Include(b => b.User).Select(b =>
-                new IdeaDetailDTO()
+                new Idea()
                 {
                     IdeaID = b.IdeaID,
                     IdeaTitle = b.IdeaTitle,
@@ -52,8 +55,8 @@ namespace GnistlyAPI.Controllers
                     IdeaChallenges = b.IdeaChallenges,
                     IdeaResults = b.IdeaResults,
                     IdeaSavings = b.IdeaSavings,
-                    IdeaAuthor = b.User.UserFname
-                }).SingleOrDefaultAsync(b => b.IdeaAuthor.Equals(id));
+                    User = b.User
+                }).SingleOrDefaultAsync(b => b.User.Equals(id));
 
             if (idea == null)
             {
@@ -98,8 +101,8 @@ namespace GnistlyAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Ideas //changed to return a DTO
-        [ResponseType(typeof(Idea))] // changed type from Idea to IdeaDTO
+        // POST: api/Ideas
+        [ResponseType(typeof(Idea))]
         public async Task<IHttpActionResult> PostIdea(Idea idea)
         {
             if (!ModelState.IsValid)
@@ -110,8 +113,7 @@ namespace GnistlyAPI.Controllers
             db.Ideas.Add(idea);
             await db.SaveChangesAsync();
 
-            //new code start:
-            db.Entry(idea).Reference(x => x.User).Load(); //load user name
+            db.Entry(idea).Reference(x => x.User).Load(); //load corresponding user
 
             var dto = new Idea()
             {
@@ -126,7 +128,6 @@ namespace GnistlyAPI.Controllers
                 IdeaResults = idea.IdeaResults,
                 UserID = idea.UserID
             };
-            //new code stop
 
             return CreatedAtRoute("DefaultApi", new { id = idea.IdeaID }, dto);
         }

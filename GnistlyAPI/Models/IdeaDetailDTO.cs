@@ -18,9 +18,5 @@ namespace GnistlyAPI.Models
         public string IdeaResults { get; set; }
         public string IdeaAuthor { get; set; }
 
-
-
-
-
     }
 }

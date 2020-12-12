@@ -8,11 +8,13 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using GnistlyAPI.Models;
 
 namespace GnistlyAPI.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CustomersController : ApiController
     {
         private Context db = new Context();
@@ -20,14 +22,14 @@ namespace GnistlyAPI.Controllers
         // GET: api/Customers
         public IQueryable<Customer> GetCustomers()
         {
-            return db.Customers;
+            return db.Customers.Include(c => c.ZipCode); // using "include" from old version, works both with WPF and webPage
         }
 
         // GET: api/Customers/5
         [ResponseType(typeof(Customer))]
         public async Task<IHttpActionResult> GetCustomer(int id)
         {
-            Customer customer = await db.Customers.Include(c => c.ZipCode).FirstOrDefaultAsync(c => c.CustomerID == id); // FirstOrdefealutasync can find all kind of properties
+            Customer customer = await db.Customers.Include(c => c.ZipCode).FirstOrDefaultAsync(c => c.CustomerID == id); //this is different from old version. If a customer gets loaded, alsothe corresponding zipcode information will be loaded. Explanation Anne: FirstOrdefealutasync can find all kind of properties
             if (customer == null)
             {
                 return NotFound();
