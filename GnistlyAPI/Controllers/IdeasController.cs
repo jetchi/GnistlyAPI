@@ -14,7 +14,11 @@ using GnistlyAPI.Models;
 
 namespace GnistlyAPI.Controllers
 {
-   [EnableCors(origins: "*", headers: "*", methods: "*")] //enables all headers, also from another origin. If only one other origign should be allowed, use the URI where the webClient is deployed as origin parameter (write "http://localhost:63342" instead of the first star).
+   [EnableCors(origins: "*", headers: "*", methods: "*")] /* enables all headers, also from another origin. 
+                                                           If only one other origin should be allowed, 
+                                                           use the URI where the webClient is deployed 
+                                                           as origin parameter (write "http://localhost:63342" 
+                                                           instead of the first star).*/
     public class IdeasController : ApiController
     {
         private Context db = new Context();
@@ -22,7 +26,7 @@ namespace GnistlyAPI.Controllers
         // GET: api/Ideas
         public IQueryable<Idea> GetIdeas() 
         {
-            return db.Ideas;
+            return db.Ideas.Include(c => c.User);
         }
 
         // not in use:
